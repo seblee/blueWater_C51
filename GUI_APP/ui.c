@@ -129,6 +129,9 @@ void uiPage00Opt(void)
     }
 
     WriteDGUS(0xa0b0, (u8*)&errorCodeShow, 2);
+    ReadDGUS(0xa020, (u8*)&errorStatus, 2);
+    errorStatus = (errorStatus & 8) ? 1 : 0;
+    WriteDGUS(0xa010, (u8*)&errorStatus, 2);
 }
 
 /**
