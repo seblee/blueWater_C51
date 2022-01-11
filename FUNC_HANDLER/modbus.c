@@ -38,7 +38,7 @@ u8 modbus_rx_count_before = 0;  //接收串口的数据
 u32 modbus_tx_process_tick = 0;  // modbus发送命令的时间间隔
 
 const modbosCmd_t modbusCmdlib[] = {
-    // en         id         fun    len  timeout      mod    modP     VP  slaveAddr feedback
+    // en       id         fun    len  timeout      mod    modP     VP  slaveAddr feedback
     {BUS_EN, SLAVE_ID, BUS_FUN_03H, 0x01, 0xc8, MODE_PAGE, PAGE00, 0xa020, 0x0050, 0x00ff},  //
     {BUS_EN, SLAVE_ID, BUS_FUN_03H, 0x01, 0xc8, MODE_PAGE, PAGE00, 0xa022, 0x0053, 0x00ff},  //
     {BUS_EN, SLAVE_ID, BUS_FUN_03H, 0x04, 0xc8, MODE_PAGE, PAGE00, 0xa023, 0x0065, 0x00ff},  //
@@ -48,14 +48,24 @@ const modbosCmd_t modbusCmdlib[] = {
     {BUS_EN, SLAVE_ID, BUS_FUN_03H, 0x01, 0xc8, MODE_PAGE, PAGE10, 0xaa29, 0x0035, 0x00ff},  //
     {BUS_EN, SLAVE_ID, BUS_FUN_06H, 0x01, 0xc8, MODE_PANP, 0xaa80, 0xaa20, 0x0016, PAGE10},
     {BUS_EN, SLAVE_ID, BUS_FUN_06H, 0x01, 0xc8, MODE_PANP, 0xaa82, 0xaa22, 0x0035, PAGE10},
+    {BUS_EN, SLAVE_ID, BUS_FUN_03H, 0x02, 0xc8, MODE_PANP, 0xab00, 0xab20, 0x001a, PAGE11},
+    {BUS_EN, SLAVE_ID, BUS_FUN_03H, 0x02, 0xc8, MODE_PANP, 0xab00, 0xab22, 0x002e, PAGE11},
+    {BUS_EN, SLAVE_ID, BUS_FUN_03H, 0x01, 0xc8, MODE_PAGE, PAGE11, 0xab24, 0x002c, PAGE11},
+    {BUS_EN, SLAVE_ID, BUS_FUN_06H, 0x01, 0xc8, MODE_PANP, 0xab80, 0xab20, 0x001a, PAGE11},
+    {BUS_EN, SLAVE_ID, BUS_FUN_06H, 0x01, 0xc8, MODE_PANP, 0xab81, 0xab21, 0x001b, PAGE11},
+    {BUS_EN, SLAVE_ID, BUS_FUN_06H, 0x01, 0xc8, MODE_PANP, 0xab82, 0xab22, 0x002e, PAGE11},
+    {BUS_EN, SLAVE_ID, BUS_FUN_06H, 0x01, 0xc8, MODE_PANP, 0xab83, 0xab23, 0x002f, PAGE11},
 
 };
 modbosCmd_t modbusCmdNow = {0};
 u8 CmdIndex              = 0;
 
 const dataCheckCmd_t dataCheckLib[] = {
-    // en     page  data    back   flag
-    {BUS_DIS, PAGE14, 0xae20, 0xae50, 0xae80},  //
+    // en     page    data    back    flag
+    {BUS_EN, PAGE11, 0xab20, 0xab50, 0xab80},  //
+    {BUS_EN, PAGE11, 0xab21, 0xab51, 0xab81},  //
+    {BUS_EN, PAGE11, 0xab22, 0xab52, 0xab82},  //
+    {BUS_EN, PAGE11, 0xab23, 0xab53, 0xab83},  //
 };
 
 _TKS_FLAGA_type modbusFlag = {0};
